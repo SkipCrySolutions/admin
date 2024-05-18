@@ -1,0 +1,94 @@
+@if(productAdded) { Product {{ editMode ? "Updated" : "Added" }} Successfully! }
+<div class="p-4">
+  <div class="flex p-4">
+    <div class="p-2">
+      Name: <input type="text" pInputText [(ngModel)]="name" class="border" />
+    </div>
+    <div class="p-2">
+      Code: <input type="text" pInputText [(ngModel)]="code" class="border" />
+    </div>
+  </div>
+  <div class="flex p-4">
+    <div class="p-2">
+      Description:
+      <textarea
+        rows="5"
+        cols="30"
+        pInputTextarea
+        [(ngModel)]="description"
+        class="border"
+      ></textarea>
+    </div>
+    <div class="p-2">
+      Big Size?:
+      <p-checkbox
+        [(ngModel)]="bigSize"
+        [binary]="true"
+        inputId="bigSize"
+        class="border"
+      ></p-checkbox>
+    </div>
+    <div class="p-2">
+      Visible?:
+      <p-checkbox
+        [(ngModel)]="visible"
+        [binary]="true"
+        inputId="visible"
+        class="border"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="flex p-4">
+    <div class="p-2">
+      Age:
+      <p-inputNumber inputId="age" [(ngModel)]="age" class="border">
+      </p-inputNumber>
+    </div>
+    <div class="p-2">
+      Original Price:
+      <p-inputNumber inputId="price" [(ngModel)]="originalPrice" class="border">
+      </p-inputNumber>
+    </div>
+  </div>
+  <div class="flex p-4">
+    <div class="p-2">
+      Brand: <input type="text" pInputText [(ngModel)]="brand" class="border" />
+    </div>
+    <div class="p-2">
+      Link: <input type="text" pInputText [(ngModel)]="link" class="border" />
+    </div>
+  </div>
+  <div class="flex p-4">
+    @if(category) {
+    <div class="p-2">
+      Category: {{ category.name }}
+      <p-listbox
+        [options]="categories"
+        [(ngModel)]="category"
+        optionLabel="name"
+        [style]="{ width: '15rem' }"
+        [listStyle]="{ 'max-height': '220px' }"
+        (onChange)="selectCategory(category)"
+      ></p-listbox>
+    </div>
+    }
+    <div class="p-2">
+      Quantity:
+      <p-inputNumber inputId="Quantity" [(ngModel)]="quantity" class="border">
+      </p-inputNumber>
+    </div>
+    @if(product) {
+    <div class="p-2">
+      <h2>Shop Quantity: {{ product.ShopQty }}</h2>
+      <h2>Class: {{ product.Class }}</h2>
+      <h2>Rent30: {{ product.rent30 }}</h2>
+      <h2>Rent15: {{ product.rent15 }}</h2>
+    </div>
+    }
+  </div>
+  <div class="flex justify-center">
+    <p-button (onClick)="addOrEditProduct()" class="border p-4">
+      @if (!editMode) { Add Product } @else() { Edit Product }
+    </p-button>
+  </div>
+</div>

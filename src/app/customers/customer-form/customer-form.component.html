@@ -1,0 +1,125 @@
+<div>
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    @if(user) {
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="customerID"
+      >
+        Customer ID: {{ user.CustomerId }}
+      </label>
+    </div>
+    }
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+          Name
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="name"
+          type="text"
+          [(ngModel)]="name"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="phoneNumber"
+        >
+          Phone Number
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="phoneNumber"
+          type="text"
+          [(ngModel)]="phone"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          Address
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="address"
+          type="text"
+          [(ngModel)]="address"
+        ></textarea>
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="location"
+        >
+          Location
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="location"
+          type="text"
+          [(ngModel)]="location"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="mapsLocation"
+        >
+          Maps Location
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="mapsLocation"
+          type="text"
+          [(ngModel)]="mapsLocation"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="distance"
+        >
+          Distance(km)
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="distance"
+          type="text"
+          [(ngModel)]="kmDistance"
+        />
+      </div>
+    </div>
+    @if(user) {
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+        Deposit Amount: {{ user.DepositAmount }}
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="orderDay">
+        Order Day: {{ user.RegisteredDay }}
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="coins">
+        Reward Coins: {{ user.RewardsCount }}
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="validity">
+        Validity: {{ user.ValidDate }}
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
+        Status: {{ user.Status }}
+      </label>
+    </div>
+    }
+  </div>
+</div>

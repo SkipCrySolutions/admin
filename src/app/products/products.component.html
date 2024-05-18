@@ -1,0 +1,36 @@
+<div class="p-4">
+  <div>
+    <input
+      pInputText
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search..."
+      (input)="performSearch()"
+    />
+    <p-button (onClick)="clearSearch()">Clear</p-button>
+  </div>
+  <div>
+    <p-button (onClick)="addProduct()">Add Product</p-button>
+  </div>
+</div>
+@if (products.length) {
+<div>
+  <div class="card">
+    <p-dataView
+      #dv
+      [value]="products"
+      [rows]="30"
+      [layout]="layout"
+      [paginator]="true"
+    >
+      <ng-template let-product pTemplate="list" let-products>
+        <div class="md:grid md:grid-cols-4 gap-2" #content>
+          @for (product of products; track $index) {
+          <app-product [product]="product"></app-product>
+          }
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+</div>
+}
