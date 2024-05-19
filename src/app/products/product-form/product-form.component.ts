@@ -1,25 +1,35 @@
-import { Component } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ListboxModule } from 'primeng/listbox';
-import { ButtonModule } from "primeng/button";
-import { ProductService } from "../product.service";
-import { ActivatedRoute } from "@angular/router";
+import { ButtonModule } from 'primeng/button';
+import { ProductService } from '../product.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface Category {
-  name: string,
-  code: string
+  name: string;
+  code: string;
 }
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
   templateUrl: 'product-form.component.html',
-  imports: [InputTextModule, FormsModule, InputTextareaModule, InputNumberModule, DropdownModule, CheckboxModule, ListboxModule, ReactiveFormsModule, ButtonModule]
+  imports: [
+    InputTextModule,
+    FormsModule,
+    InputTextareaModule,
+    InputNumberModule,
+    DropdownModule,
+    CheckboxModule,
+    ListboxModule,
+    ReactiveFormsModule,
+    ButtonModule,
+  ],
 })
 export class ProductFormComponent {
   public name = '';
@@ -33,6 +43,8 @@ export class ProductFormComponent {
   public quantity = 0;
   public bigSize = false;
   public visible = false;
+  public franchise = false;
+  public searchKey = '';
 
   public categories: Category[] = [];
 
@@ -44,11 +56,13 @@ export class ProductFormComponent {
 
   public editMode = false;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) {
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {
     this.categories = this.getCategories();
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.productId = params['Code'];
-      console.log('sdf => ', this.productId);
       if (this.productId !== 'new') {
         this.editMode = true;
         this.getProductByCode();
@@ -59,12 +73,11 @@ export class ProductFormComponent {
   }
 
   public selectCategory(category: any) {
-    console.log('cc => ', category);
     this.category = category;
   }
 
   public addOrEditProduct() {
-    console.log('or => ', this.originalPrice);
+    console.log('franchise => ', this.franchise);
     const classType: any = this.getClass(this.originalPrice);
     const rent30: any = this.getRent30(classType);
     const rent15 = rent30 * 0.7;
@@ -84,33 +97,48 @@ export class ProductFormComponent {
       bigSize: this.bigSize,
       visible: this.visible,
       Link: this.link,
+      Franchise: this.franchise,
+      SearchKey: this.searchKey,
     };
     console.log('product => ', this.product);
 
-    this.productService.addOrEditProduct(this.product, this.editMode).subscribe(() => {
-      this.productAdded = true;
-      if (!this.editMode)
-        this.resetForm();
-    });
+    this.productService
+      .addOrEditProduct(this.product, this.editMode)
+      .subscribe(() => {
+        this.productAdded = true;
+        if (!this.editMode) this.resetForm();
+      });
+  }
+
+  public generateSearchKey() {
+    this.searchKey = `${this.name}, ${this.code}, ${this.brand}, ${this.category?.name}, ${this.age}+`;
   }
 
   private getProductByCode() {
-    this.productService.getProductByCode(this.productId).subscribe((product: any) => {
-      this.product = product;
-      console.log('product => ', product, this.getCategory(product.Category));
-      this.name = product.Name;
-      this.description = product.Description;
-      this.code = product.Code;
-      this.age = product.Age.slice(0, -1);
-      this.originalPrice = product.MRP;
-      this.brand = product.Brand;
-      this.link = product.link;
-      this.category = this.getCategory(product.Category);
-      this.quantity = product.Quantity;
-      this.bigSize = product.bigSize;
-      this.visible = product.visible;
-      this.link = product.Link
-    });
+    this.productService
+      .getProductByCode(this.productId)
+      .subscribe((product: any) => {
+        this.product = product;
+        console.log(
+          'product => ',
+          this.product,
+          this.getCategory(product.Category)
+        );
+        this.name = product.Name;
+        this.description = product.Description;
+        this.code = product.Code;
+        this.age = product.Age.slice(0, -1);
+        this.originalPrice = product.MRP;
+        this.brand = product.Brand;
+        this.link = product.link;
+        this.category = this.getCategory(product.Category).code;
+        this.quantity = product.Quantity;
+        this.bigSize = product.bigSize;
+        this.visible = product.visible;
+        this.link = product.Link;
+        this.franchise = product.Franchise;
+        this.searchKey = product.SearchKey;
+      });
   }
 
   private resetForm() {
@@ -125,8 +153,9 @@ export class ProductFormComponent {
     this.quantity = 0;
     this.bigSize = false;
     this.visible = false;
+    this.franchise = false;
+    this.searchKey = '';
   }
-
 
   private getCategories() {
     return [
@@ -154,13 +183,13 @@ export class ProductFormComponent {
       { name: 'STEM toys', code: 'stemToys' },
       { name: 'Story Books', code: 'storyBooks' },
       { name: 'Think Books', code: 'thinkBooks' },
-      { name: 'Touch & Feel Books', code: 'touchBooks' }
+      { name: 'Touch & Feel Books', code: 'touchBooks' },
     ];
   }
 
   private getCategory(category: string) {
     return this.getCategories().filter((t) => {
-      return t.name === category;
+      return t.code === category;
     })[0];
   }
 

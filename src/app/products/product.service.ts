@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   public getProductByCode(code: number): Observable<any> {
-    const url = `/api/products/${code}`;
+    const url = `/api/products/get/${code}`;
     return this.http.get(url);
   }
 
