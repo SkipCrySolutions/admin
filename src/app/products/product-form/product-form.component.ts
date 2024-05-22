@@ -8,7 +8,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ListboxModule } from 'primeng/listbox';
 import { ButtonModule } from 'primeng/button';
 import { ProductService } from '../product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Category {
   name: string;
@@ -58,7 +58,8 @@ export class ProductFormComponent {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.categories = this.getCategories();
     this.route.params.subscribe((params) => {
@@ -73,6 +74,7 @@ export class ProductFormComponent {
   }
 
   public selectCategory(category: any) {
+    console.log('fghj => ', category);
     this.category = category;
   }
 
@@ -89,7 +91,7 @@ export class ProductFormComponent {
       MRP: this.originalPrice,
       Age: `${this.age}+`,
       Brand: this.brand,
-      Category: this.category.name || '',
+      Category: this.category || '',
       Quantity: this.quantity,
       Class: classType,
       rent30: rent30,
@@ -107,11 +109,12 @@ export class ProductFormComponent {
       .subscribe(() => {
         this.productAdded = true;
         if (!this.editMode) this.resetForm();
+        this.router.navigate(['products']);
       });
   }
 
   public generateSearchKey() {
-    this.searchKey = `${this.name}, ${this.code}, ${this.brand}, ${this.category?.name}, ${this.age}+`;
+    this.searchKey = `${this.name}, ${this.code}, ${this.brand}, ${this.category}, ${this.age}+`;
   }
 
   private getProductByCode() {
