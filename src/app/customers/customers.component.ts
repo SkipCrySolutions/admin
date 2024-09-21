@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { UserService } from "./user.service";
-import { ButtonModule } from "primeng/button";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 
@@ -8,7 +7,7 @@ import { FormsModule } from "@angular/forms";
   selector: 'app-customers',
   standalone: true,
   templateUrl: 'customers.component.html',
-  imports: [ButtonModule, FormsModule]
+  imports: [FormsModule]
 })
 export class CustomersComponent {
   public users: any = [];
