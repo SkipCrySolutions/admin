@@ -1,0 +1,43 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <!-- Repeat this div block for each customer -->
+  @for (store of stores; track $index) {
+  <div class="bg-white rounded-lg shadow-md p-4">
+    <div class="flex">
+      <div>
+        <span class="text-red-500 pr-2">{{ store.StoreId }}</span>
+        <span class="text-lg font-semibold mb-2">{{ store.Name }}</span>
+      </div>
+      <div class="ml-auto">
+        <span class="pr-2">{{ store.Owner }}</span>
+        <span class="pr-2">{{ store.OwnerContact }}</span>
+        <i
+          class="fa-solid fa-pen-to-square cursor-pointer"
+          (click)="editStore(store)"
+        ></i>
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div>
+        {{ store.Manager }}
+      </div>
+      <div>
+        {{ store.ManagerContact }}
+      </div>
+    </div>
+    <div class="flex">
+      <div>
+        {{ store.Address }}
+      </div>
+      <div>
+        {{ store.Pincode }}
+      </div>
+    </div>
+    <div class="flex">
+      <div class="text-blue-300 underline">
+        <a target="_blank" href="{{ store.MapsLocation }}">Maps Location</a>
+      </div>
+      <div>{{ store.Latitude }} - {{ store.Longitude }}</div>
+    </div>
+  </div>
+  }
+</div>

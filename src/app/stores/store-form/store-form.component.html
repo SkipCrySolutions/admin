@@ -1,0 +1,154 @@
+<div>
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    @if(store) {
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="storeID">
+        Store ID: {{ store.StoreId }}
+      </label>
+    </div>
+    }
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+          Store Name
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="name"
+          type="text"
+          [(ngModel)]="name"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="owner">
+          Owner
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="owner"
+          type="text"
+          [(ngModel)]="owner"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="ownerNumber"
+        >
+          Owner Number
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="phoneNumber"
+          type="text"
+          [(ngModel)]="ownerPhone"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="manager">
+          Manager Name
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="manager"
+          type="text"
+          [(ngModel)]="managerName"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="managerNumber"
+        >
+          Manager Number
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="phoneNumber"
+          type="text"
+          [(ngModel)]="managerPhone"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          Address
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="address"
+          type="text"
+          [(ngModel)]="address"
+        ></textarea>
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="pincode"
+        >
+          Pincode
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="pincode"
+          type="text"
+          [(ngModel)]="pincode"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="mapsLocation"
+        >
+          Maps Location
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="mapsLocation"
+          type="text"
+          [(ngModel)]="mapsLocation"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="latitude"
+        >
+          Latitude
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="latitude"
+          type="text"
+          [(ngModel)]="latitude"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="longitude"
+        >
+          Longitude
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="longitude"
+          type="text"
+          [(ngModel)]="longitude"
+        />
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <button (click)="editStore()" class="border p-4">
+        Update
+      </button>
+    </div>
+  </div>
+</div>

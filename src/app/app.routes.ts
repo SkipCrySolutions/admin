@@ -5,6 +5,8 @@ import { ProductFormComponent } from './products/product-form/product-form.compo
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomerFormComponent } from './customers/customer-form/customer-form.component';
+import { StoresComponent } from './stores/stores.component';
+import { StoreFormComponent } from './stores/store-form/store-form.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -12,5 +14,7 @@ export const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'product/form/:Code', component: ProductFormComponent },
   { path: 'customers', component: CustomersComponent },
-  { path: 'customer/form/:Code', component: CustomerFormComponent }
+  { path: 'customer/form/:Code', component: CustomerFormComponent },
+  { path: 'stores', component: StoresComponent },
+  { path: 'store/form/:Code', component: StoreFormComponent },
 ];

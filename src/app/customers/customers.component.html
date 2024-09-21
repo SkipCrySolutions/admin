@@ -8,10 +8,15 @@
       (input)="performSearch()"
       class="p-2"
     />
-    <p-button class="pl-2" (onClick)="clearSearch()">Clear</p-button>
+    <button class="pl-2" (onClick)="clearSearch()">Clear</button>
   </div>
   <div class="ml-auto">
-    <p-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded border p-2" (onClick)="addUser()">Add Customer</p-button>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded border p-2"
+      (onClick)="addUser()"
+    >
+      Add Customer
+    </button>
   </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -24,12 +29,11 @@
         <span class="text-lg font-semibold mb-2">{{ user.Name }}</span>
       </div>
       <div class="ml-auto">
-        <span class="pr-2">{{user.Mobile}}</span>
-        <p-button
-          icon="pi pi-user-edit"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
-          (onClick)="editCustomer(user)"
-        ></p-button>
+        <span class="pr-2">{{ user.Mobile }}</span>
+        <i
+          class="fa-solid fa-user-pen cursor-pointer"
+          (click)="editCustomer(user)"
+        ></i>
       </div>
     </div>
     <div class="flex">
@@ -38,21 +42,17 @@
       <div class="pr-2">
         {{ user.Location }}
       </div>
-      <div class="ml-auto">
-        Order Day: {{user.RegisteredDay}}
-      </div>
+      <div class="ml-auto">Order Day: {{ user.RegisteredDay }}</div>
     </div>
     <div class="flex">
       <div>
         {{ user.Address }}
       </div>
-      <div class="ml-auto">
-        {{user.RewardsCount}} coins
-      </div>
+      <div class="ml-auto">{{ user.RewardsCount }} coins</div>
     </div>
     <div class="flex justify-between">
       @if (user.ValidDate) {
-        <div class="pr-4">Valid: {{ user.ValidDate }}</div>
+      <div class="pr-4">Valid: {{ user.ValidDate }}</div>
       }
       <div class="text-blue-300 underline">
         <a target="_blank" href="{{ user.Maps_Link }}">Maps Location</a>
