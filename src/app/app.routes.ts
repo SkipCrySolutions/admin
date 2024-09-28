@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'product/form/:Code', component: ProductFormComponent },
+  { path: 'product/form/:Code/:StoreCode/:id', component: ProductFormComponent },
   { path: 'customers', component: CustomersComponent },
   { path: 'customer/form/:Code', component: CustomerFormComponent },
   { path: 'stores', component: StoresComponent },

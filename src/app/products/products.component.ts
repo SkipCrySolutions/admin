@@ -50,7 +50,7 @@ export class ProductsComponent {
   }
 
   public addProduct() {
-    this.router.navigate(['product', 'form', 'new']);
+    this.router.navigate(['product', 'form', 'new', 'CHNPER1']);
   }
 
   private getProducts(): void {

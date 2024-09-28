@@ -9,6 +9,8 @@ import { ListboxModule } from 'primeng/listbox';
 import { ButtonModule } from 'primeng/button';
 import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from '../product.model';
+import { ProductQuantityComponent } from '../quantity/product-quantity.component';
 
 interface Category {
   name: string;
@@ -29,13 +31,14 @@ interface Category {
     ListboxModule,
     ReactiveFormsModule,
     ButtonModule,
+    ProductQuantityComponent
   ],
 })
 export class ProductFormComponent {
   public name = '';
   public description = '';
   public code = '';
-  public age = 0;
+  public age = '';
   public originalPrice = 0;
   public brand = '';
   public link = '';
@@ -48,11 +51,15 @@ export class ProductFormComponent {
 
   public categories: Category[] = [];
 
-  public product: any = null;
+  public product: Product | undefined;
 
   public productAdded = false;
 
-  private productId: any;
+  private productId!: string;
+
+  private productCode!: string;
+
+  private storeId!: string;
 
   public editMode = false;
 
@@ -63,7 +70,10 @@ export class ProductFormComponent {
   ) {
     this.categories = this.getCategories();
     this.route.params.subscribe((params) => {
-      this.productId = params['Code'];
+      this.productCode = params['Code'];
+      this.storeId = params['StoreCode'];
+      this.productId = params['id'];
+      console.log(this.productId);
       if (this.productId !== 'new') {
         this.editMode = true;
         this.getProductByCode();
@@ -92,18 +102,15 @@ export class ProductFormComponent {
       Age: `${this.age}+`,
       Brand: this.brand,
       Category: this.category || '',
-      Quantity: this.quantity,
       Class: classType,
       rent30: rent30,
       rent15: rent15,
       bigSize: this.bigSize,
-      visible: this.visible,
       Link: this.link,
       Franchise: this.franchise,
       SearchKey: this.searchKey,
-    };
+    } as Product;
     console.log('product => ', this.product);
-
     this.productService
       .addOrEditProduct(this.product, this.editMode)
       .subscribe(() => {
@@ -119,13 +126,11 @@ export class ProductFormComponent {
 
   private getProductByCode() {
     this.productService
-      .getProductByCode(this.productId)
-      .subscribe((product: any) => {
+      .getProductByCode(this.productId, this.storeId, this.productCode)
+      .subscribe((product: Product) => {
         this.product = product;
         console.log(
-          'product => ',
-          this.product,
-          this.getCategory(product.Category)
+          'product => ',product
         );
         this.name = product.Name;
         this.description = product.Description;
@@ -133,20 +138,18 @@ export class ProductFormComponent {
         this.age = product.Age.slice(0, -1);
         this.originalPrice = product.MRP;
         this.brand = product.Brand;
-        this.link = product.link;
         this.category = this.getCategory(product.Category).code;
-        this.quantity = product.Quantity;
         this.bigSize = product.bigSize;
-        this.visible = product.visible;
         this.link = product.Link;
         this.franchise = product.Franchise;
         this.searchKey = product.SearchKey;
+        this.quantity = product.Quantity;
       });
   }
 
   private resetForm() {
     this.code = '';
-    this.age = 0;
+    this.age = '';
     this.name = '';
     this.description = '';
     this.originalPrice = 0;

@@ -1,0 +1,123 @@
+<h1 style="text-align: center; color: #4caf50">Quantity Tracker</h1>
+<!-- <button (click)="drawer.toggle()">Open Form</button> -->
+<mat-sidenav-container class="quantity-container">
+  <mat-sidenav #drawer class="quantity-sidenav" mode="over">
+    @if (productQuantity) {
+      <form
+      #productQuantityForm="ngForm"
+      (ngSubmit)="onSubmit(productQuantityForm)"
+    >
+      <div>
+        <label for="qtyCode">Quantity Code:</label>
+        <input
+          type="text"
+          id="qtyCode"
+          name="qtyCode"
+          [(ngModel)]="productQuantity.QtyCode"
+          [disabled]="!productQuantity.QtyCode"
+        />
+      </div>
+      <div>
+        <label for="dateAdded">Date Added:</label>
+        <input
+          type="date"
+          id="dateAdded"
+          name="dateAdded"
+          [(ngModel)]="productQuantity.DateAdded"
+          required
+        />
+      </div>
+      <div>
+        <label for="earned">Earned:</label>
+        <input
+          type="number"
+          id="earned"
+          name="earned"
+          [(ngModel)]="productQuantity.Earned"
+        />
+      </div>
+      <div>
+        <label for="remarks">Remarks:</label>
+        <input
+          type="text"
+          id="remarks"
+          name="remarks"
+          [(ngModel)]="productQuantity.Remarks"
+        />
+      </div>
+      <div>
+        <label for="rentedTimes">Rented Times:</label>
+        <input
+          type="number"
+          id="rentedTimes"
+          name="rentedTimes"
+          [(ngModel)]="productQuantity.RentedTimes"
+        />
+      </div>
+      <div>
+        <label for="productCode">Product Code:</label>
+        <input
+          type="text"
+          id="productCode"
+          name="productCode"
+          [(ngModel)]="productQuantity.ProductCode"
+          [disabled]="true"
+        />
+      </div>
+      <div>
+        <label for="nextAvailable">Next Available:</label>
+        <input
+          type="date"
+          id="nextAvailable"
+          name="nextAvailable"
+          [(ngModel)]="productQuantity.NextAvailable"
+        />
+      </div>
+      <div>
+        <label for="storeId">Store ID:</label>
+        <input
+          type="text"
+          id="storeId"
+          name="storeId"
+          [(ngModel)]="productQuantity.StoreId"
+          [disabled]="true"
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    }
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="text-align: center; margin-bottom: 20px">
+      <button (click)="createNewQuantity();drawer.toggle()">Create New Quantity</button>
+    </div>
+    <div class="product-grid" style="height: 600px;">
+      <div
+        *ngFor="let productQty of productQtys | slice : 0 : 10"
+        class="product-item"
+      >
+        <div class="card">
+          <div class="card-header">
+            <h2>Product Name <i class="fa fa-edit" (click)="editProductQty(productQty); drawer.toggle()"></i></h2>
+          </div>
+          <div class="card-body">
+            <p><strong>Quantity Code:</strong> {{ productQty.QtyCode }}</p>
+            <p>
+              <strong>Date Added:</strong>
+              {{ productQty.DateAdded | date : "medium" }}
+            </p>
+            <p><strong>Earned:</strong> {{ productQty.Earned }}</p>
+            <p><strong>Remarks:</strong> {{ productQty.Remarks }}</p>
+            <p><strong>Rented Times:</strong> {{ productQty.RentedTimes }}</p>
+            <p><strong>Product Code:</strong> {{ product.Code }}</p>
+            <p>
+              <strong>Next Available:</strong>
+              {{ productQty.NextAvailable | date : "medium" }}
+            </p>
+            <p><strong>Store ID:</strong> {{ product.StoreId }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
