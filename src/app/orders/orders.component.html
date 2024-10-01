@@ -1,19 +1,115 @@
 <div class="container">
   <h1 class="text-2xl font-bold mb-4">Our Orders</h1>
   <div>
-    <p-timeline [value]="events" layout="horizontal" align="top">
+    <!-- <p-timeline [value]="events" layout="horizontal" align="top">
       <ng-template pTemplate="content" let-event>
         {{ event }}
       </ng-template>
-    </p-timeline>
+    </p-timeline> -->
+  </div>
+  <div class="flex border-b mb-4">
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'placed',
+        'border-transparent': orderService.selectedTab !== 'placed'
+      }"
+      (click)="selectTab('placed')"
+    >
+      Placed
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'accepted',
+        'border-transparent': orderService.selectedTab !== 'accepted'
+      }"
+      (click)="selectTab('accepted')"
+    >
+      Accepted
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'packed',
+        'border-transparent': orderService.selectedTab !== 'packed'
+      }"
+      (click)="selectTab('packed')"
+    >
+      Packed
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'ontheway',
+        'border-transparent': orderService.selectedTab !== 'ontheway'
+      }"
+      (click)="selectTab('ontheway')"
+    >
+      On The Way
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'delivered',
+        'border-transparent': orderService.selectedTab !== 'delivered'
+      }"
+      (click)="selectTab('delivered')"
+    >
+      Delivered
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'returnTime',
+        'border-transparent': orderService.selectedTab !== 'returnTime'
+      }"
+      (click)="selectTab('returnTime')"
+    >
+      Ready for return
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'toyCheck',
+        'border-transparent': orderService.selectedTab !== 'toyCheck'
+      }"
+      (click)="selectTab('toyCheck')"
+    >
+      Toy Check
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'closed',
+        'border-transparent': orderService.selectedTab !== 'closed'
+      }"
+      (click)="selectTab('closed')"
+    >
+      Closed
+    </button>
+    <button
+      class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+      [ngClass]="{
+        'border-blue-500': orderService.selectedTab === 'all',
+        'border-transparent': orderService.selectedTab !== 'all'
+      }"
+      (click)="selectTab('all')"
+    >
+      All Orders
+    </button>
   </div>
   <div>
+    <p>Orders Count: {{ orders.length }}</p>
     @for (order of orders; track order) {
     <div class="bg-white shadow-md p-4 rounded-lg my-2">
       <div>
         <div class="flex">
           <div class="px-2 font-semibold border rounded">
             <span class="text-red-500">{{ order.customerId }}</span>
+          </div>
+          <div class="px-2 font-semibold border rounded">
+            <span class="text-yellow-500">{{ order.storeId }}</span>
           </div>
           <div class="text-md font-bold mb-2 px-2">Order #{{ order._id }}</div>
           <div class="px-2">{{ order.Status }}</div>
