@@ -7,12 +7,12 @@ import { Observable } from "rxjs";
 })
 export class OrdersService {
 
+  public selectedTab = 'placed';
   constructor(private http: HttpClient) {
-    this.getAllOrders();
   }
 
-  public getAllOrders(): Observable<any> {
-    const url = `/api/orders`;
+  public getOrders(): Observable<any> {
+    const url = `/api/orders/get/${this.selectedTab}`;
     return this.http.get(url);
   }
 
