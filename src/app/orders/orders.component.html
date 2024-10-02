@@ -111,11 +111,11 @@
           <div class="px-2 font-semibold border rounded">
             <span class="text-yellow-500">{{ order.storeId }}</span>
           </div>
-          <div class="text-md font-bold mb-2 px-2">Order #{{ order._id }}</div>
+          <div class="text-md font-bold mb-2 px-2">Order #{{ order.orderId }}</div>
           <div class="px-2">{{ order.Status }}</div>
           <div class="px-2">
             @if (order.Status !== 'Closed') {
-            <p-button class="border p-2" (onClick)="setStatus(order._id)">
+            <p-button class="border p-2" (onClick)="setStatus(order)">
               @if (order.Status === 'Placed') { Accept } @if (order.Status ===
               'Accepted') { Pack } @if (order.Status === 'Packed') { Ready for
               delivery } @if (order.Status === 'OnTheWay') { Delivered } @if

@@ -70,8 +70,8 @@ export class OrdersComponent {
     });
   }
 
-  public setStatus(orderId: string) {
-    this.orderService.getOrderState(orderId).subscribe(() => {
+  public setStatus(order: any) {
+    this.orderService.getOrderState(order).subscribe(() => {
       this.selectTab(this.orderService.selectedTab);
     });
   }
