@@ -16,8 +16,8 @@ export class OrdersService {
     return this.http.get(url);
   }
 
-  public getOrderState(orderId: string) {
-    const url = `/api/orders/changeState/${orderId}`;
+  public getOrderState(order: any): Observable<any> {
+    const url = `/api/orders/changeState/${order.storeId}/${order.customerId}/${order.orderId}`;
     return this.http.get(url);
   }
 }
