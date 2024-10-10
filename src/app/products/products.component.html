@@ -13,24 +13,32 @@
     <p-button (onClick)="addProduct()">Add Product</p-button>
   </div>
 </div>
+<div class="flex border-b mb-4">
+  <button
+    class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+    [ngClass]="{
+      'border-blue-500': selectedTab === 'all',
+      'border-transparent': selectedTab !== 'all'
+    }"
+    (click)="selectTab('all')"
+  >
+    All Products
+  </button>
+  <button
+    class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+    [ngClass]="{
+      'border-blue-500': selectedTab === 'franchise',
+      'border-transparent': selectedTab !== 'franchise'
+    }"
+    (click)="selectTab('franchise')"
+  >
+    Franchise
+  </button>
+</div>
 @if (products.length) {
-<div>
-  <div class="card">
-    <p-dataView
-      #dv
-      [value]="products"
-      [rows]="30"
-      [layout]="layout"
-      [paginator]="true"
-    >
-      <ng-template let-product pTemplate="list" let-products>
-        <div class="md:grid md:grid-cols-4 gap-2" #content>
-          @for (product of products; track $index) {
-          <app-product [product]="product"></app-product>
-          }
-        </div>
-      </ng-template>
-    </p-dataView>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+  <div *ngFor="let product of products">
+    <app-product [product]="product"></app-product>
   </div>
 </div>
 }

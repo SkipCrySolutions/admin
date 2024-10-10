@@ -8,7 +8,9 @@ import { Product } from "./product.model";
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.http.get(`/api/productQty`).subscribe();
+  }
 
   public getAllProducts(): Observable<any> {
     const url = `/api/products`;

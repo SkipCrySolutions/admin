@@ -23,8 +23,11 @@ export class ProductsComponent {
 
   searchQuery: string = '';
 
+  public selectedTab = 'all';
+
   constructor(private productService: ProductService, private router: Router) {
     this.getProducts();
+    // this.selectTab('franchise');
   }
 
   public performSearch(): void {
@@ -51,6 +54,16 @@ export class ProductsComponent {
 
   public addProduct() {
     this.router.navigate(['product', 'form', 'new', 'CHNPER1']);
+  }
+
+  public selectTab(tab: string) {
+    this.selectedTab = tab;
+    if (tab === 'franchise') {
+      this.products = this.copyProducts.filter((product: any) => product.Franchise);
+      console.log('franchise products => ', this.products);
+    } else {
+      this.products = this.copyProducts;
+    }
   }
 
   private getProducts(): void {

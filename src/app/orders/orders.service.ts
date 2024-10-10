@@ -17,7 +17,7 @@ export class OrdersService {
   }
 
   public getOrderState(order: any): Observable<any> {
-    const url = `/api/orders/changeState/${order.storeId}/${order.customerId}/${order.orderId}`;
+    const url = `/api/orders/changeState/${order.storeId}/${order.customerId}/${order.orderId}/false`;
     return this.http.get(url);
   }
 }

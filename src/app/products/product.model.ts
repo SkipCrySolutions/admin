@@ -26,4 +26,6 @@ export interface Product {
   Quantity: number;
   ShopQty: number;
   quantities: ProductQuantity[];
+  DriveImageLink: string;
+  Mrp: number;
 }
