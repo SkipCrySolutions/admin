@@ -6,9 +6,9 @@
   <div class="h-3/5 overflow-hidden">
     <img
       [src]="
-        'https://toyimages.s3.ap-southeast-2.amazonaws.com/' +
+        'assets/toyImages/' +
         product.Code +
-        '.jpg'
+        '/1.jpg'
       "
       alt="Item Image"
       class="w-full h-full object-cover"
@@ -17,7 +17,7 @@
   <div class="h-1/5 border-t">
     <div class="mt-1 h-3/5">
       <p class="text-md font-semibold text-center">
-        {{ product.Name }}
+        {{ product.Name }} - &#8377;{{ product.Mrp }}
       </p>
     </div>
     <div class="flex justify-between mt-1">

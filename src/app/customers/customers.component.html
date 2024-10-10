@@ -8,7 +8,7 @@
       (input)="performSearch()"
       class="p-2"
     />
-    <button class="pl-2" (onClick)="clearSearch()">Clear</button>
+    <button class="pl-2" (click)="clearSearch()">Clear</button>
   </div>
   <div class="ml-auto">
     <button
@@ -37,18 +37,33 @@
       </div>
     </div>
     <div class="flex">
+      @if (user.DepositAmount) {
       <div class="pr-2">&#8377;{{ user.DepositAmount }}</div>
+      } @else {
+      <div class="pr-2">No Deposit</div>
+      } @if (user.KmDistance) {
       <div class="pr-2">{{ user.KmDistance }}km</div>
-      <div class="pr-2">
-        {{ user.Location }}
-      </div>
+      } @else {
+      <div class="pr-2">No Distance</div>
+      } @if (user.Location) {
+      <div class="pr-2">{{ user.Location }}</div>
+      } @else {
+      <div class="pr-2">No Location</div>
+      } @if(user.RegisteredDay) {
       <div class="ml-auto">Order Day: {{ user.RegisteredDay }}</div>
+      } @else {
+      <div class="ml-auto">No Order Day</div>
+      }
     </div>
     <div class="flex">
       <div>
         {{ user.Address }}
       </div>
+      @if (user.RewardsCount) {
       <div class="ml-auto">{{ user.RewardsCount }} coins</div>
+      } @else {
+      <div class="ml-auto">No Coins</div>
+      }
     </div>
     <div class="flex justify-between">
       @if (user.ValidDate) {

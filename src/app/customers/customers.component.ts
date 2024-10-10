@@ -21,11 +21,13 @@ export class CustomersComponent {
     this.userService.getUsers().subscribe((resp: any) => {
       this.users = resp;
       console.log('users => ', this.users);
+      this.copyUsers = this.users;
     });
   }
 
   public editCustomer(user: any) {
-    this.router.navigate(['customer', 'form', user._id]);
+    console.log('user => ', user);
+    this.router.navigate(['customer', 'form', user._id, user.CustomerId]);
   }
 
   public performSearch(): void {
@@ -33,13 +35,15 @@ export class CustomersComponent {
     if (this.searchQuery.length >= 3) {
       // Perform search logic here, e.g., filtering users based on searchQuery
       this.users = this.users.filter((user: any) => {
-        console.log('user => ', user);
-        const searchIncluded = user.Code.toLowerCase().includes(this.searchQuery);
+        console.log('user => ', user, this.searchQuery);
+        const searchIncluded = user.CustomerId && user.CustomerId.includes(this.searchQuery);
+        console.log('searchIncluded => ', searchIncluded);
         if (searchIncluded)
           return user;
-      }
-      );
+      });
       console.log('users => ', this.users);
+    } else {
+      this.users = this.copyUsers;
     }
   }
 

@@ -69,6 +69,16 @@
       Ready for return
     </button>
     <button
+    class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
+    [ngClass]="{
+      'border-blue-500': orderService.selectedTab === 'returned',
+      'border-transparent': orderService.selectedTab !== 'returned'
+    }"
+    (click)="selectTab('returned')"
+  >
+    Returned
+  </button>
+    <button
       class="px-4 py-2 -mb-px font-semibold text-gray-800 border-b-2"
       [ngClass]="{
         'border-blue-500': orderService.selectedTab === 'toyCheck',
@@ -144,7 +154,7 @@
           </div>
         </div>
         <h2>Order Date: {{ order.orderDate }}</h2>
-        <h2>Order Amount: &#8377;{{ order.orderTotal }}</h2>
+        <h2>Order Amount: &#8377;{{ order.amountToPay }}</h2>
       </div>
       @if(order.expanded) {
       <div>

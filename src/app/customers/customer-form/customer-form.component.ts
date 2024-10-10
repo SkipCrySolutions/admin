@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 })
 export class CustomerFormComponent {
   public userId: any;
+  public userCode: any;
   public editMode = false;
   public user: any;
 
@@ -24,6 +25,7 @@ export class CustomerFormComponent {
   constructor(private route: ActivatedRoute, private userService: UserService) {
     this.route.params.subscribe(params => {
       this.userId = params['Code'];
+      this.userCode = params['CustomerId'];
       console.log('sdf => ', this.userId);
       if (this.userId) {
         this.editMode = true;
@@ -35,7 +37,7 @@ export class CustomerFormComponent {
   }
 
   private getCustomerByCode() {
-    this.userService.getUserById(this.userId).subscribe((user: any) => {
+    this.userService.getUserById(this.userId, this.userCode).subscribe((user: any) => {
       this.user = user;
       console.log('user => ', user);
       this.name = user.Name;
