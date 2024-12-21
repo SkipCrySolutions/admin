@@ -1,43 +1,64 @@
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <!-- Repeat this div block for each customer -->
-  @for (store of stores; track $index) {
-  <div class="bg-white rounded-lg shadow-md p-4">
-    <div class="flex">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+  <!-- Store Cards -->
+  <div
+    class="bg-white rounded-lg shadow-md p-4 flex flex-col gap-2"
+    *ngFor="let store of stores"
+  >
+    <!-- Header Section -->
+    <div class="flex justify-between items-center border-b pb-2">
       <div>
-        <span class="text-red-500 pr-2">{{ store.StoreId }}</span>
-        <span class="text-lg font-semibold mb-2">{{ store.Name }}</span>
+        <span class="text-red-500 text-sm font-semibold">{{ store.StoreId }}</span>
+        <span class="text-lg font-bold ml-2">{{ store.Name }}</span>
       </div>
-      <div class="ml-auto">
-        <span class="pr-2">{{ store.Owner }}</span>
-        <span class="pr-2">{{ store.OwnerContact }}</span>
+      <div class="flex gap-3 text-gray-700">
         <i
-          class="fa-solid fa-pen-to-square cursor-pointer"
+          class="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-500"
           (click)="editStore(store)"
+          title="Edit Store"
+        ></i>
+        <i
+          class="fa-solid fa-trash cursor-pointer hover:text-red-500"
+          (click)="deleteStore(store)"
+          title="Delete Store"
         ></i>
       </div>
     </div>
-    <div class="flex justify-between">
-      <div>
-        {{ store.Manager }}
+
+    <!-- Owner and Manager Info -->
+    <div class="text-gray-600 flex flex-col gap-1">
+      <div class="flex justify-between">
+        <span class="font-medium">Owner:</span>
+        <span>{{ store.Owner }} | {{ store.OwnerContact }}</span>
       </div>
-      <div>
-        {{ store.ManagerContact }}
-      </div>
-    </div>
-    <div class="flex">
-      <div>
-        {{ store.Address }}
-      </div>
-      <div>
-        {{ store.Pincode }}
+      <div class="flex justify-between">
+        <span class="font-medium">Manager:</span>
+        <span>{{ store.Manager }} | {{ store.ManagerContact }}</span>
       </div>
     </div>
-    <div class="flex">
-      <div class="text-blue-300 underline">
-        <a target="_blank" href="{{ store.MapsLocation }}">Maps Location</a>
+
+    <!-- Address and Location Info -->
+    <div class="text-gray-500 mt-2">
+      <div>{{ store.Address }}, {{ store.Pincode }}</div>
+      <div class="mt-1 flex justify-between items-center">
+        <a
+          class="text-blue-500 underline hover:text-blue-700"
+          target="_blank"
+          href="{{ store.MapsLocation }}"
+        >
+          View on Maps
+        </a>
+        <span>{{ store.Latitude }} - {{ store.Longitude }}</span>
       </div>
-      <div>{{ store.Latitude }} - {{ store.Longitude }}</div>
     </div>
   </div>
-  }
+</div>
+
+<!-- Add Store Button -->
+<div class="flex justify-center mt-6">
+  <button
+    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow-lg"
+    (click)="addStore()"
+  >
+    Add Store
+  </button>
 </div>
