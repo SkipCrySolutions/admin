@@ -1,4 +1,11 @@
 <div>
+  @if(errorMsg) {
+  <div class="flex justify-center">
+    <div class="text-red-500">
+      {{ errorMsg }}
+    </div>
+  </div>
+  }
   <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
     @if(user) {
     <div class="mb-4">
@@ -9,110 +16,27 @@
         Customer ID: {{ user.CustomerId }}
       </label>
     </div>
-    }
-    <div class="flex justify-between">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Name
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="name"
-          type="text"
-          [(ngModel)]="name"
-        />
-      </div>
-      <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="phoneNumber"
-        >
-          Phone Number
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="phoneNumber"
-          type="text"
-          [(ngModel)]="phone"
-        />
-      </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="customerID"
+      >
+        Mobile: {{ user.Mobile }}
+      </label>
     </div>
-    <div class="flex justify-between">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
-          Address
-        </label>
-        <textarea
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="address"
-          type="text"
-          [(ngModel)]="address"
-        ></textarea>
-      </div>
-      <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="location"
-        >
-          Location
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="location"
-          type="text"
-          [(ngModel)]="location"
-        />
-      </div>
-    </div>
-    <div class="flex justify-between">
-      <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="mapsLocation"
-        >
-          Maps Location
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="mapsLocation"
-          type="text"
-          [(ngModel)]="mapsLocation"
-        />
-      </div>
-      <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="distance"
-        >
-          Distance(km)
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="distance"
-          type="text"
-          [(ngModel)]="kmDistance"
-        />
-      </div>
-    </div>
-    @if(user) {
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
         Deposit Amount: &#8377;{{ user.DepositAmount }}
       </label>
     </div>
     <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="orderDay">
-        Order Day: {{ user.RegisteredDay }}
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="coins">
+        Total Amount: &#8377;{{ user.totalAmount }}
       </label>
     </div>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="coins">
-        Total Wallet: &#8377;{{ user.totalAmount }}
-      </label>
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="validity">
-        Validity: {{ user.ValidDate }}
+        Rewards Amount: &#8377;{{ user.amountFromRewards }}
       </label>
     </div>
     <div class="mb-4">
@@ -120,6 +44,254 @@
         Status: {{ user.Status }}
       </label>
     </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
+        City: {{ user.City }}
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
+        StoreId: {{ user.StoreId }}
+      </label>
+    </div>
+    <form>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          Update Status
+        </label>
+        <select
+          id="selectOption"
+          name="selectOption"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          [(ngModel)]="status"
+          (ngModelChange)="status = $event"
+        >
+          <option value="">None</option>
+          @for (status of statusList; track $index) {
+          <option [value]="status">
+            {{ status }}
+          </option>
+          }
+        </select>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          Update Deposit Amount <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="depositAmount"
+          name="depositAmount"
+          type="number"
+          [(ngModel)]="depositAmount"
+        />
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          Reward amount to add
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="rewardsToAdd"
+          name="rewardsToAdd"
+          type="number"
+          [(ngModel)]="rewardsToAdd"
+        />
+      </div>
+      <div class="flex justify-between">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+            Name <span class="text-red-500">*</span>
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="customerName"
+            name="customerName"
+            type="text"
+            [(ngModel)]="user.Name"
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="phoneNumber"
+          >
+            Phone Number <span class="text-red-500">*</span>
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="phoneNumber"
+            name="phoneNumber"
+            type="number"
+            [(ngModel)]="user.Mobile"
+          />
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+          Password <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="password"
+          name="password"
+          type="text"
+          [(ngModel)]="password"
+        />
+      </div>
+      <div class="flex flex-col space-y-2 mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-1" for="pincode">
+          Pincode <span class="text-red-500">*</span>
+        </label>
+        <div class="flex items-center space-x-2">
+          <!-- Pincode Input -->
+          <input
+            id="pincode"
+            name="pincode"
+            type="number"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
+            [(ngModel)]="user.Pincode"
+          />
+          <!-- Check Icon Button -->
+          <button
+            class="p-2 bg-green-500 text-white rounded hover:bg-green-600 focus:ring focus:ring-green-400"
+            (click)="updatePincode()"
+          >
+            <i class="fa-solid fa-check"></i>
+          </button>
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="location"
+          >
+            Location
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="location"
+            name="location"
+            type="text"
+            [(ngModel)]="user.Location"
+          />
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+          Zone
+        </label>
+        <select
+          id="selectZoneOption"
+          name="selectZoneOption"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          [(ngModel)]="zone"
+          (ngModelChange)="zone = $event"
+        >
+          <option value="">None</option>
+          @for (zone of zones; track $index) {
+          <option [value]="zone">
+            {{ zone }}
+          </option>
+          }
+        </select>
+      </div>
+      <div class="flex justify-between">
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="address"
+          >
+            Address
+          </label>
+          <textarea
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="address"
+            name="address"
+            type="text"
+            [(ngModel)]="user.Address"
+          ></textarea>
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="mapsLocation"
+          >
+            Maps Location
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="mapsLocation"
+            name="mapsLocation"
+            type="text"
+            [(ngModel)]="user.Maps_Link"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="distance"
+          >
+            Distance(km)
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="distance"
+            name="distance"
+            type="number"
+            [(ngModel)]="kmDistance"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="storeId"
+          >
+            StoreId
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="storeId"
+            name="storeId"
+            type="text"
+            [(ngModel)]="user.StoreId"
+          />
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="remarks"
+          >
+            Remarks
+          </label>
+          <textarea
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="remarks"
+            name="remarks"
+            type="text"
+            [(ngModel)]="user.remarks"
+            [disabled]="true"
+          ></textarea>
+        </div>
+      </div>
+      <div class="flex justify-center p-4">
+        <button
+          (click)="addOrEditUser()"
+          class="border border-gray-300 bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          @if (!editMode) { Add User } @else() { Edit User }
+        </button>
+      </div>
+    </form>
     }
   </div>
 </div>

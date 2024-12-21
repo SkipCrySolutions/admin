@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { UserService } from "./user.service";
-import { Router } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { Component } from '@angular/core';
+import { UserService } from './user.service';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
   templateUrl: 'customers.component.html',
-  imports: [FormsModule]
+  imports: [FormsModule],
 })
 export class CustomersComponent {
   public users: any = [];
@@ -36,10 +36,13 @@ export class CustomersComponent {
       // Perform search logic here, e.g., filtering users based on searchQuery
       this.users = this.users.filter((user: any) => {
         console.log('user => ', user, this.searchQuery);
-        const searchIncluded = user.CustomerId && user.CustomerId.includes(this.searchQuery);
+        const mobile = String(user.Mobile);
+        const searchIncluded =
+          (user.CustomerId && user.CustomerId.includes(this.searchQuery)) ||
+          (mobile && mobile.includes(this.searchQuery)) ||
+          (user.Name && user.Name.includes(this.searchQuery));
         console.log('searchIncluded => ', searchIncluded);
-        if (searchIncluded)
-          return user;
+        if (searchIncluded) return user;
       });
       console.log('users => ', this.users);
     } else {
@@ -55,6 +58,6 @@ export class CustomersComponent {
   }
 
   public addUser() {
-    this.router.navigate(['customer', 'form', 'new']);
+    this.router.navigate(['customer', 'form', 'new', 'new']);
   }
 }

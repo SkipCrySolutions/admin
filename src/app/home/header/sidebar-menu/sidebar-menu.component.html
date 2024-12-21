@@ -1,0 +1,56 @@
+<!-- User menu -->
+<div
+  (click)="toggleDrawer()"
+  class="flex items-center justify-center w-10 h-10 bg-four-color-light cursor-pointer hover:bg-four-color transition-colors duration-300"
+>
+  <i class="fa-solid fa-bars"></i>
+</div>
+
+<div class="fixed inset-0 flex z-50" [class.hidden]="!showDrawer">
+  <!-- Overlay background -->
+  <div
+    class="fixed opacity-50 w-1/5 right-0 top-0 bottom-0"
+    (click)="toggleDrawer()"
+  ></div>
+
+  <!-- Drawer Content with 80% width -->
+  <div class="bg-white w-4/5 h-full shadow-lg overflow-auto">
+    <div>
+      <div class="flex justify-end">
+        <button
+          class="text-gray-500 hover:text-gray-700 text-3xl font-bold p-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+          (click)="toggleDrawer()"
+        >
+          &times; <span class="p-1 text-lg">Close</span>
+        </button>
+      </div>
+      @if(appService.user()) {
+      <div class="border-t border-gray-500">
+        <div
+          class="flex justify-between items-center px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 hover:text-gray-900 border-b"
+          (click)="loadStores()"
+        >
+          <span>Stores</span>
+        </div>
+        <div
+          class="flex justify-between items-center px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 hover:text-gray-900 border-b"
+          (click)="loadCustomers()"
+        >
+          <span>Customers</span>
+        </div>
+      </div>
+      } @else {
+      <div
+        class="border-t border-gray-500 text-black py-4 text-center font-semibold"
+      >
+        <button
+          class="bg-four-color text-white px-6 py-2 rounded-lg hover:bg-four-color-dark focus:outline-none focus:ring-2 focus:ring-bg-four-color-light"
+          (click)="login()"
+        >
+          Login to view stores and customers
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+</div>

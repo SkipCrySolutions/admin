@@ -1,0 +1,93 @@
+<div class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="p-6 rounded-lg w-80 bg-one-color">
+    @if(errorMessage) {
+    <div class="flex justify-center">
+      <div class="text-red-500">
+        {{ errorMessage }}
+      </div>
+    </div>
+    }
+    <!-- Header -->
+    <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Login</h2>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="login()" novalidate>
+      <!-- Mobile Input -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-semibold mb-2"
+          for="username"
+        >
+          Mobile <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-400"
+          id="username"
+          type="number"
+          name="username"
+          placeholder="Mobile"
+          [(ngModel)]="mobile"
+          (ngModelChange)="validatePhoneNumber()"
+          [required]="true"
+          #username="ngModel"
+        />
+      </div>
+
+      <!-- Password Input -->
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-semibold mb-2"
+          for="password"
+        >
+          Password <span class="text-red-500">*</span>
+        </label>
+        <input
+          class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-400"
+          id="password1"
+          type="password"
+          name="password1"
+          placeholder="Password"
+          [(ngModel)]="password"
+          (ngModelChange)="validatePassword()"
+          [required]="true"
+          #password1="ngModel"
+        />
+      </div>
+
+      <!-- Login Button -->
+      <div class="flex justify-center">
+        <button
+          class="text-white font-bold py-2 px-4 rounded"
+          [disabled]="!(isValidPhoneNumber && isValidPassword)"
+          [ngClass]="{
+            'bg-blue-600 hover:bg-blue-700':
+              isValidPhoneNumber && isValidPassword,
+            'bg-blue-300 cursor-not-allowed': !(
+              isValidPhoneNumber && isValidPassword
+            )
+          }"
+        >
+          @if(!isLoading) {
+          <span>Login</span>
+          } @if(isLoading) {
+          <i class="animate-spin fa-solid fa-spinner pr-2"></i>
+          <span>Login...</span>
+          }
+        </button>
+      </div>
+    </form>
+
+    <!-- Signup Section -->
+    <!-- <div
+      class="flex items-center justify-between mt-8 bg-gray-50 p-4 rounded-lg"
+    >
+      <span class="text-gray-600 font-medium">Create account?</span>
+      <button
+        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200"
+        [routerLink]="['/signup']"
+      >
+        Signup
+      </button>
+    </div> -->
+  </div>
+</div>

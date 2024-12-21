@@ -1,0 +1,25 @@
+<header #header class="bg-one-color text-white fixed w-full top-0 z-10">
+  <div class="flex justify-between">
+    <div class="flex items-center cursor-pointer bg-one-color p-2">
+      <app-sidebar-menu></app-sidebar-menu>
+    </div>
+    <div class="container mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center cursor-pointer">
+        <img
+          src="assets/miniLogo.png"
+          alt="Logo"
+          class="h-16"
+          [routerLink]="['/']"
+        />
+      </div>
+    </div>
+    <div class="flex items-center cursor-pointer bg-one-color p-2">
+      <div
+        class="flex items-center justify-center w-10 h-10 bg-yellow-100 rounded-full cursor-pointer hover:bg-yellow-200 transition-colors duration-300"
+      >
+        <app-user-menu></app-user-menu>
+      </div>
+    </div>
+  </div>
+</header>
