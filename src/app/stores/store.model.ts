@@ -1,5 +1,5 @@
 export interface Store {
-  _id: string;             // MongoDB ObjectId as a string
+  _id?: string;             // MongoDB ObjectId as a string
   StoreId: string;         // Store Identifier
   Name: string;            // Store Name
   Address: string;         // Store Address
@@ -11,4 +11,5 @@ export interface Store {
   Latitude: number;        // Store Latitude
   Longitude: number;       // Store Longitude
   Pincode: number;         // Store's Postal Code
+  ParentStoreId: string;
 }

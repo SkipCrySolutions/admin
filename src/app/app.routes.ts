@@ -16,5 +16,6 @@ export const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'customer/form/:Code/:CustomerId', component: CustomerFormComponent },
   { path: 'stores', component: StoresComponent },
+  { path: 'store/add', component: StoreFormComponent },
   { path: 'store/form/:Code', component: StoreFormComponent },
 ];

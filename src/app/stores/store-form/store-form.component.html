@@ -1,154 +1,256 @@
-<div>
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    @if(store) {
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="storeID">
-        Store ID: {{ store.StoreId }}
-      </label>
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <form #storeForm="ngForm" (ngSubmit)="onSubmit(storeForm)">
+    <div *ngIf="store">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="storeID">
+          Store ID: {{ store.StoreId }}
+        </label>
+      </div>
     </div>
-    }
+    <div *ngIf="!store">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="StoreId">
+          Store Id *
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="StoreId"
+          name="StoreId"
+          type="text"
+          [(ngModel)]="storeId"
+          required
+          pattern="^[A-Z0-9]{6,10}$"
+          #storeIdInput="ngModel"
+        />
+        <div *ngIf="storeIdInput.invalid && (storeIdInput.dirty || storeIdInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="storeIdInput.errors?.['required']">Store ID is required.</div>
+          <div *ngIf="storeIdInput.errors?.['pattern']">Store ID must be 6-10 alphanumeric characters (uppercase).</div>
+        </div>
+      </div>
+    </div>
+
     <div class="flex justify-between">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Store Name
+          Store Name *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="name"
+          name="name"
           type="text"
           [(ngModel)]="name"
+          required
+          minlength="3"
+          maxlength="50"
+          #nameInput="ngModel"
         />
+        <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="nameInput.errors?.['required']">Store Name is required.</div>
+          <div *ngIf="nameInput.errors?.['minlength']">Store Name must be at least 3 characters long.</div>
+          <div *ngIf="nameInput.errors?.['maxlength']">Store Name cannot exceed 50 characters.</div>
+        </div>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="owner">
-          Owner
+          Owner *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="owner"
+          name="owner"
           type="text"
           [(ngModel)]="owner"
+          required
+          pattern="^([A-Z][a-z]{1,29})(\s[A-Z][a-z]{1,29})*$"
+          #ownerInput="ngModel"
         />
+        <div *ngIf="ownerInput.invalid && (ownerInput.dirty || ownerInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="ownerInput.errors?.['required']">Owner Name is required.</div>
+          <div *ngIf="ownerInput.errors?.['pattern']">Owner Name must be 3-30 letters and spaces only.And should start with capital letters.</div>
+        </div>
       </div>
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="ownerNumber"
-        >
-          Owner Number
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="ownerNumber">
+          Owner Number *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="phoneNumber"
-          type="text"
+          name="phoneNumber"
+          type="tel"
           [(ngModel)]="ownerPhone"
+          required
+          pattern="^[6-9]\d{9}$"
+          #ownerPhoneInput="ngModel"
         />
+        <div *ngIf="ownerPhoneInput.invalid && (ownerPhoneInput.dirty || ownerPhoneInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="ownerPhoneInput.errors?.['required']">Owner Phone Number is required.</div>
+          <div *ngIf="ownerPhoneInput.errors?.['pattern']">Invalid phone number.</div>
+        </div>
       </div>
     </div>
+
     <div class="flex justify-between">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="manager">
-          Manager Name
+          Manager Name *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="manager"
+          name="manager"
           type="text"
           [(ngModel)]="managerName"
+          required
+          pattern="^([A-Z][a-z]{1,29})(\s[A-Z][a-z]{1,29})*$"
+          #managerInput="ngModel"
         />
+        <div *ngIf="managerInput.invalid && (managerInput.dirty || managerInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="managerInput.errors?.['required']">Manager Name is required.</div>
+          <div *ngIf="managerInput.errors?.['pattern']">Manager Name must be 3-30 letters and spaces only.And should start with capital letters.</div>
+        </div>
       </div>
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="managerNumber"
-        >
-          Manager Number
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="managerNumber">
+          Manager Number *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="phoneNumber"
-          type="text"
+          name="managerPhoneNumber"
+          type="tel"
           [(ngModel)]="managerPhone"
+          required
+          pattern="^[6-9]\d{9}$"
+          #managerPhoneInput="ngModel"
         />
+        <div *ngIf="managerPhoneInput.invalid && (managerPhoneInput.dirty || managerPhoneInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="managerPhoneInput.errors?.['required']">Manager Phone Number is required.</div>
+          <div *ngIf="managerPhoneInput.errors?.['pattern']">Invalid phone number.</div>
+        </div>
       </div>
     </div>
+
     <div class="flex justify-between">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
-          Address
+          Address *
         </label>
         <textarea
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="address"
-          type="text"
+          name="address"
           [(ngModel)]="address"
+          required
+          minlength="10"
+          maxlength="200"
+          #addressInput="ngModel"
         ></textarea>
+        <div *ngIf="addressInput.invalid && (addressInput.dirty || addressInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="addressInput.errors?.['required']">Address is required.</div>
+          <div *ngIf="addressInput.errors?.['minlength']">Address must be at least 10 characters long.</div>
+          <div *ngIf="addressInput.errors?.['maxlength']">Address cannot exceed 200 characters.</div>
+        </div>
       </div>
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="pincode"
-        >
-          Pincode
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="pincode">
+          Pincode *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="pincode"
+          name="pincode"
           type="text"
           [(ngModel)]="pincode"
+          required
+          pattern="^\d{6}$"
+          #pincodeInput="ngModel"
         />
+        <div *ngIf="pincodeInput.invalid && (pincodeInput.dirty || pincodeInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="pincodeInput.errors?.['required']">Pincode is required.</div>
+          <div *ngIf="pincodeInput.errors?.['pattern']">Pincode must be 6 digits.</div>
+        </div>
       </div>
     </div>
+
     <div class="flex justify-between">
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="mapsLocation"
-        >
-          Maps Location
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="mapsLocation">
+          Maps Location *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="mapsLocation"
+          name="mapsLocation"
           type="text"
           [(ngModel)]="mapsLocation"
+          required
+          pattern="^(https?://)?maps\.google\.com/.*$"
+          #mapsLocationInput="ngModel"
         />
+        <div *ngIf="mapsLocationInput.invalid && (mapsLocationInput.dirty || mapsLocationInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="mapsLocationInput.errors?.['pattern']">Must be a valid Google Maps URL.</div>
+        </div>
       </div>
     </div>
+
     <div class="flex justify-between">
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="latitude"
-        >
-          Latitude
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="latitude">
+          Latitude *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="latitude"
+          name="latitude"
           type="text"
           [(ngModel)]="latitude"
+          required
+          pattern="^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$"
+          #latitudeInput="ngModel"
         />
+        <div *ngIf="latitudeInput.invalid && (latitudeInput.dirty || latitudeInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="latitudeInput.errors?.['pattern']">Invalid latitude format. Use decimal degrees (-90 to 90).</div>
+        </div>
       </div>
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="longitude"
-        >
-          Longitude
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="longitude">
+          Longitude *
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="longitude"
+          name="longitude"
           type="text"
           [(ngModel)]="longitude"
+          required
+          pattern="^-?([1-9]?[0-9]|1[0-7][0-9]|180)\.{1}\d{1,6}$"
+          #longitudeInput="ngModel"
         />
+        <div *ngIf="longitudeInput.invalid && (longitudeInput.dirty || longitudeInput.touched)" class="text-red-500 text-xs mt-1">
+          <div *ngIf="longitudeInput.errors?.['pattern']">Invalid longitude format. Use decimal degrees (-180 to 180).</div>
+        </div>
       </div>
     </div>
+
     <div class="flex justify-center">
-      <button (click)="editStore()" class="border p-4">
+      <button 
+        *ngIf="editMode" 
+        tyep=""submit
+        [disabled]="isSubmitting || !storeForm.form.valid"
+        class="border p-4 bg-blue-500 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
         Update
       </button>
+      <button 
+    *ngIf="!editMode" 
+    type="submit" 
+    [disabled]="isSubmitting || !storeForm.form.valid"
+    class="border p-4 bg-green-500 text-white rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    Add Store
+  </button>
     </div>
-  </div>
+  </form>
 </div>
