@@ -139,6 +139,23 @@
           [(ngModel)]="password"
         />
       </div>
+      <div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="storeId"
+          >
+            StoreId <span class="text-red-500">*</span>
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="storeId"
+            name="storeId"
+            type="text"
+            [(ngModel)]="user.StoreId"
+          />
+        </div>
+      </div>
       <div class="flex flex-col space-y-2 mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="pincode">
           Pincode <span class="text-red-500">*</span>
@@ -245,23 +262,6 @@
             name="distance"
             type="number"
             [(ngModel)]="kmDistance"
-          />
-        </div>
-      </div>
-      <div>
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="storeId"
-          >
-            StoreId
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="storeId"
-            name="storeId"
-            type="text"
-            [(ngModel)]="user.StoreId"
           />
         </div>
       </div>

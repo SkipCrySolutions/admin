@@ -64,6 +64,7 @@ export class CustomerFormComponent implements OnInit {
         Maps_Link: '',
         KmDistance: 0,
         remarks: '',
+        StoreId: 'CHNPER1',
       };
       console.log('user new => ', this.user);
     }
@@ -75,7 +76,8 @@ export class CustomerFormComponent implements OnInit {
       this.user.Mobile &&
       this.user.Pincode &&
       this.user.Name &&
-      this.user.Status
+      this.user.Status &&
+      this.user.StoreId
     ) {
       let user = {
         ...this.user,
