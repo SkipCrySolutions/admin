@@ -25,9 +25,41 @@
     Add Customer
   </button>
 </div>
-
+<div class="p-2 flex flex-wrap gap-2">
+  <span
+    class="p-2 font-semibold rounded-lg mr-2 cursor-pointer"
+    [ngClass]="{'bg-blue-500 text-white': selectedFilterTag === 'active', 'bg-gray-200 text-black': selectedFilterTag !== 'active'}"
+    (click)="loadByFilterTags('active')"
+    >Active</span
+  >
+  <span
+    class="p-2 font-semibold rounded-lg mr-2 cursor-pointer"
+    [ngClass]="{'bg-blue-500 text-white': selectedFilterTag === 'new', 'bg-gray-200 text-black': selectedFilterTag !== 'new'}"
+    (click)="loadByFilterTags('new')"
+    >New</span
+  >
+  <span
+    class="p-2 font-semibold rounded-lg mr-2 cursor-pointer"
+    [ngClass]="{'bg-blue-500 text-white': selectedFilterTag === 'paused', 'bg-gray-200 text-black': selectedFilterTag !== 'paused'}"
+    (click)="loadByFilterTags('paused')"
+    >Paused</span
+  >
+  <span
+    class="p-2 font-semibold rounded-lg cursor-pointer"
+    [ngClass]="{'bg-blue-500 text-white': selectedFilterTag === 'stopped', 'bg-gray-200 text-black': selectedFilterTag !== 'stopped'}"
+    (click)="loadByFilterTags('stopped')"
+    >Stopped</span
+  >
+  <span
+  class="p-2 font-semibold rounded-lg cursor-pointer"
+  [ngClass]="{'bg-blue-500 text-white': selectedFilterTag === 'all', 'bg-gray-200 text-black': selectedFilterTag !== 'all'}"
+  (click)="loadByFilterTags('all')"
+  >All</span
+>
+</div>
 <!-- Customer Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+  <p>#Customers {{users.length}}</p>
   <!-- Repeat this div block for each customer -->
   @for (user of users; track $index) {
   <div

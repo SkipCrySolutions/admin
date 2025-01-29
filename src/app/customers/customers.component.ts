@@ -2,27 +2,39 @@ import { Component } from '@angular/core';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
   templateUrl: 'customers.component.html',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
 })
 export class CustomersComponent {
   public users: any = [];
   private copyUsers: any = [];
-  searchQuery: string = '';
+  public searchQuery: string = '';
+  public selectedFilterTag = 'active';
   constructor(private userService: UserService, private router: Router) {
-    this.getCustomers();
+    this.loadByFilterTags('active');
   }
 
-  private getCustomers(): void {
-    this.userService.getUsers().subscribe((resp: any) => {
+  private getCustomers(value: string): void {
+    this.userService.getUsers(value).subscribe((resp: any) => {
       this.users = resp;
       console.log('users => ', this.users);
       this.copyUsers = this.users;
     });
+  }
+
+  public loadByFilterTags(value: string) {
+    this.resetCustomerDefaults();
+    this.selectedFilterTag = value;
+    this.getCustomers(value);
+  }
+
+  private resetCustomerDefaults() {
+    this.users = [];
   }
 
   public editCustomer(user: any) {

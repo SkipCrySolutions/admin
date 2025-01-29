@@ -30,6 +30,7 @@ export class CustomerFormComponent implements OnInit {
   public statusList = ['New', 'Active', 'Paused', 'Stopped', 'Indirect'];
   public depositAmount = 0;
   public rewardsToAdd = 0;
+  public totalAmountToAdd = 0;
   public remarks = '';
   public password = '';
   public errorMsg = '';
@@ -59,7 +60,7 @@ export class CustomerFormComponent implements OnInit {
         City: '',
         Name: '',
         Mobile: 0,
-        Address: '',
+        address: '',
         Location: '',
         Maps_Link: '',
         KmDistance: 0,
@@ -71,7 +72,7 @@ export class CustomerFormComponent implements OnInit {
   }
 
   public addOrEditUser() {
-    console.log('fghjk => ', this.user);
+    console.log('fghjk => ', this.user, this.rewardsToAdd, this.totalAmountToAdd);
     if (
       this.user.Mobile &&
       this.user.Pincode &&
@@ -82,7 +83,7 @@ export class CustomerFormComponent implements OnInit {
       let user = {
         ...this.user,
         amountFromRewards: this.user.amountFromRewards + this.rewardsToAdd,
-        totalAmount: this.user.totalAmount + this.rewardsToAdd,
+        totalAmount: this.user.totalAmount + this.rewardsToAdd + this.totalAmountToAdd,
         Status: this.status || this.user.Status,
         DepositAmount: isNaN(this.depositAmount)
           ? this.user.DepositAmount
@@ -129,11 +130,12 @@ export class CustomerFormComponent implements OnInit {
         console.log('user => ', user);
         this.name = user.Name;
         this.phone = user.Mobile;
-        this.address = user.Address;
+        this.address = user.address;
         this.location = user.Location;
         this.kmDistance = user.KmDistance;
         this.mapsLocation = user.Maps_Link;
         this.depositAmount = +user.DepositAmount;
+        this.status = user.Status;
       });
   }
 

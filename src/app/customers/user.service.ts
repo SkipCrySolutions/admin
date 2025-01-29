@@ -9,8 +9,8 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  public getUsers() {
-    const url = `/api/users`;
+  public getUsers(value: string) {
+    const url = `/api/users/${value}`;
     return this.http.get(url);
   }
 

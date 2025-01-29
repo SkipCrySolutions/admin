@@ -5,7 +5,7 @@ export interface User {
   Name: string;
   City: string;
   Location: string;
-  Address: string;
+  address: string;
   Password: string;
   cartCount: number;
   KmDistance: number;
